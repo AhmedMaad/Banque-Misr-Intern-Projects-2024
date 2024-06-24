@@ -1,3 +1,7 @@
-<resources>
-    <string name="app_name">Profile Card Layout</string>
-</resources>
+
+    <resources>
+        <string name="app_name" translatable="false">Profile Card Layout</string>
+        <string name="name">Ahmed Atef</string>
+        <string name="job">Android Developer</string>
+    </resources>
+

@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,8 +44,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     ProfileCard(
-                        "Ahmed Atef",
-                        "Android Developer",
+                        stringResource(R.string.name),
+                        stringResource(R.string.job),
                         "maad@gmail.com",
                         "+201111111111",
                     )
@@ -113,13 +114,13 @@ fun ProfileCard(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, locale = "ar")
 @Composable
 fun ProfileCardPreview() {
     ProfileCardLayoutTheme {
         ProfileCard(
-            "Ahmed Atef",
-            "Android Developer",
+            stringResource(R.string.name),
+            stringResource(R.string.job),
             "maad@gmail.com",
             "+201111111111",
             modifier = Modifier.fillMaxSize()
