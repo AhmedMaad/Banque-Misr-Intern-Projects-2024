@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Joke Teller</string>
+    <string name="joke_1">An Android Developer had a new child called him Kotlin with \"Koty\" as a nickname (Koty Koty Koo!)</string>
+    <string name="joke_2">Developers found a Java Developer who was trying to \"drink\" the language.</string>
+    <string name="joke_3">A hungry Android Developer was trying to make an order from a restaurant, so he ordered a large \"compose\" burger.</string>
+    <string name="joke_4">An iOS developer wanted to make a \"Swift\" career.</string>
+    <string name="ha_ha_me">Ha Ha me</string>
+    <string name="jokes_will_appear_here">Jokes will appear here</string>
+    <string name="ha_ha">Ha Ha!</string>
+</resources>
