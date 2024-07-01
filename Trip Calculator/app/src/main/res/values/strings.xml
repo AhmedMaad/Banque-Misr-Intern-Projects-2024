@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Trip Calculator</string>
+    <string name="car">Car</string>
+    <string name="road">Road</string>
+</resources>
