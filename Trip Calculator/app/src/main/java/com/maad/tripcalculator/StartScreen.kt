@@ -34,7 +34,7 @@ fun StartScreen(modifier: Modifier = Modifier) {
     var isAnimated by remember { mutableStateOf(false) }
     val transition = updateTransition(targetState = isAnimated, label = "translation")
     val screenWidth = LocalConfiguration.current.screenWidthDp.toFloat()
-    val animationDuration = 300 //Calculates in Millis
+    val animationDuration = 300 //Calculated in Millis
     val context = LocalContext.current
 
     //Offset: It tells you how far something is shifted from a starting position
@@ -72,10 +72,11 @@ fun StartScreen(modifier: Modifier = Modifier) {
                 MediaPlayer
                     .create(context, R.raw.car_horn)
                     .start()
+                //Navigate to "DistanceScreen"
                       },
             modifier = modifier.align(Alignment.CenterHorizontally)
         ) {
-            Text(text = "Start")
+            Text(text = stringResource(R.string.start))
         }
         Image(
             painter = painterResource(id = R.drawable.car),
@@ -89,6 +90,6 @@ fun StartScreen(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-private fun AppPreview() {
+private fun StartScreenPreview() {
     StartScreen()
 }
