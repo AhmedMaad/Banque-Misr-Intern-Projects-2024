@@ -9,12 +9,14 @@ import androidx.navigation.navArgument
 import com.maad.tripcalculator.Route.DISTANCE
 import com.maad.tripcalculator.Route.START
 import com.maad.tripcalculator.Route.TIME
+import com.maad.tripcalculator.Route.TRAFFIC_OPTIONS
 
 //Singleton object
 object Route {
     const val START = "start"
     const val DISTANCE = "distance"
     const val TIME = "time"
+    const val TRAFFIC_OPTIONS = "traffic_options"
 }
 
 @Composable
@@ -31,6 +33,18 @@ fun AppNavHost() {
         ) {
             val km = it.arguments?.getFloat("km")!!
             TimeScreen(navController, km)
+        }
+
+        composable(
+            route = "$TRAFFIC_OPTIONS/{km}/{trip_time}",
+            arguments = listOf(
+                navArgument("km") { type = NavType.FloatType },
+                navArgument("trip_time") { type = NavType.IntType }
+            )
+        ) {
+            val km = it.arguments?.getFloat("km")!!
+            val time = it.arguments?.getInt("trip_time")!!
+            TrafficOptionsScreen(navController, km = km, time = time)
         }
 
     }

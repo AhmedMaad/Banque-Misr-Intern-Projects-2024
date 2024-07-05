@@ -6,4 +6,6 @@
     <string name="distance_in_kilometers">Distance in kilometers</string>
     <string name="start">Start</string>
     <string name="next">Next</string>
+    <string name="enter_the_total_time">Enter the total time</string>
+    <string name="time_in_minutes">Time in minutes</string>
 </resources>

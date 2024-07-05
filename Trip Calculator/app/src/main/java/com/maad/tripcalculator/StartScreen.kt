@@ -28,12 +28,7 @@
     import androidx.compose.ui.tooling.preview.Preview
     import androidx.compose.ui.unit.dp
     import androidx.navigation.NavController
-    import androidx.navigation.NavHost
-    import androidx.navigation.NavHostController
-    import androidx.navigation.compose.NavHost
-    import androidx.navigation.compose.composable
     import androidx.navigation.compose.rememberNavController
-    import androidx.navigation.navigation
     import com.maad.tripcalculator.Route.DISTANCE
 
     @Composable
@@ -43,7 +38,6 @@
         val transition = updateTransition(targetState = isAnimated, label = "translation")
         val screenWidth = LocalConfiguration.current.screenWidthDp.toFloat()
         val animationDuration = 300 //Calculated in Millis
-
         val context = LocalContext.current
 
         //Offset: It tells you how far something is shifted from a starting position
