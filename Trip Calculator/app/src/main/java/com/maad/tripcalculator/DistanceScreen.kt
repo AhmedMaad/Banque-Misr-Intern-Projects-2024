@@ -1,5 +1,6 @@
 package com.maad.tripcalculator
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,9 +21,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun DistanceScreen(modifier: Modifier = Modifier) {
+fun DistanceScreen(navController: NavController, modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -40,13 +43,17 @@ fun DistanceScreen(modifier: Modifier = Modifier) {
                 Text(text = stringResource(R.string.distance_in_kilometers))
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+
             modifier = modifier
                 .fillMaxWidth()
                 .padding(all = 32.dp)
         )
 
         Button(onClick = {
-            //Navigate to "TimeScreen"
+            //Log.d("trace", "Navigating to time screen")
+            val distance = distanceField.toDoubleOrNull() ?: 0.0
+            //navController.navigate("$TIME/$distance/${500}")
+
         }) {
             Text(text = stringResource(R.string.next))
         }
@@ -59,5 +66,5 @@ fun DistanceScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun DistanceScreenPreview() {
-    DistanceScreen()
+   DistanceScreen(rememberNavController())
 }
