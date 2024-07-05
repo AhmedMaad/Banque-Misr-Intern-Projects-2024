@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.maad.tripcalculator.Route.TIME
 
 @Composable
 fun DistanceScreen(navController: NavController, modifier: Modifier = Modifier) {
@@ -48,17 +49,12 @@ fun DistanceScreen(navController: NavController, modifier: Modifier = Modifier) 
                 .fillMaxWidth()
                 .padding(all = 32.dp)
         )
-
         Button(onClick = {
-            //Log.d("trace", "Navigating to time screen")
-            val distance = distanceField.toDoubleOrNull() ?: 0.0
-            //navController.navigate("$TIME/$distance/${500}")
-
+            val distance = distanceField.toDouble()
+            navController.navigate("$TIME/$distance")
         }) {
             Text(text = stringResource(R.string.next))
         }
-
-
     }
 }
 
@@ -66,5 +62,5 @@ fun DistanceScreen(navController: NavController, modifier: Modifier = Modifier) 
 @Preview(showBackground = true)
 @Composable
 fun DistanceScreenPreview() {
-   DistanceScreen(rememberNavController())
+    DistanceScreen(rememberNavController())
 }
