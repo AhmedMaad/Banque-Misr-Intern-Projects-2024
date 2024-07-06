@@ -9,4 +9,8 @@
     <string name="enter_the_total_time">Enter the total time</string>
     <string name="time_in_minutes">Time in minutes</string>
     <string name="calculate_trip_price">Calculate Trip Price</string>
+    <string name="estimated_trip_price_is">Estimated trip price is:</string>
+    <string name="egp">Egp</string>
+    <string name="price_calculated_successfully">Price Calculated Successfully!</string>
+    <string name="start_over">Start Over</string>
 </resources>
