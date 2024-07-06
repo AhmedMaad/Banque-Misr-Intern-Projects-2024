@@ -15,7 +15,8 @@ fun DistanceScreen(navController: NavController, modifier: Modifier = Modifier) 
         onClick = { distanceField ->
             val distance = distanceField.toDouble()
             navController.navigate("$TIME/$distance")
-        }
+        },
+        modifier = modifier
     )
 }
 

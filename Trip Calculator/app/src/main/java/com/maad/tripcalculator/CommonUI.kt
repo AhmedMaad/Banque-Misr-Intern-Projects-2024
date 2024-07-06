@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -40,7 +41,7 @@ fun DataEntry(
         OutlinedTextField(
             //The value of the text field is set to the "remembered" value
             value = textField,
-            //'it' contains the new value
+            //'value' contains the new value
             onValueChange = { value ->
                 textField = if (isTimeInput) value.filter { it.isDigit() } else value
             },
@@ -58,5 +59,5 @@ fun DataEntry(
         }
     }
 
-
 }
+

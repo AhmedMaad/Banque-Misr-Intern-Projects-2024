@@ -10,6 +10,7 @@ import com.maad.tripcalculator.Route.DISTANCE
 import com.maad.tripcalculator.Route.START
 import com.maad.tripcalculator.Route.TIME
 import com.maad.tripcalculator.Route.TRAFFIC_OPTIONS
+import com.maad.tripcalculator.Route.TRIP_PRICE
 
 //Singleton object
 object Route {
@@ -17,6 +18,7 @@ object Route {
     const val DISTANCE = "distance"
     const val TIME = "time"
     const val TRAFFIC_OPTIONS = "traffic_options"
+    const val TRIP_PRICE = "trip_price"
 }
 
 @Composable
@@ -34,7 +36,6 @@ fun AppNavHost() {
             val km = it.arguments?.getFloat("km")!!
             TimeScreen(navController, km)
         }
-
         composable(
             route = "$TRAFFIC_OPTIONS/{km}/{trip_time}",
             arguments = listOf(
@@ -45,6 +46,19 @@ fun AppNavHost() {
             val km = it.arguments?.getFloat("km")!!
             val time = it.arguments?.getInt("trip_time")!!
             TrafficOptionsScreen(navController, km = km, time = time)
+        }
+        composable(
+            route = "$TRIP_PRICE/{km}/{trip_time}/{traffic}",
+            arguments = listOf(
+                navArgument("km") { type = NavType.FloatType },
+                navArgument("trip_time") { type = NavType.IntType },
+                navArgument("traffic") { type = NavType.FloatType }
+            )
+        ) {
+            val km = it.arguments?.getFloat("km")!!
+            val time = it.arguments?.getInt("trip_time")!!
+            val traffic = it.arguments?.getFloat("traffic")!!
+            TripPriceScreen(navController, km = km, time = time, traffic = traffic)
         }
 
     }

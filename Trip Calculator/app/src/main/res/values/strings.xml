@@ -8,4 +8,5 @@
     <string name="next">Next</string>
     <string name="enter_the_total_time">Enter the total time</string>
     <string name="time_in_minutes">Time in minutes</string>
+    <string name="calculate_trip_price">Calculate Trip Price</string>
 </resources>
