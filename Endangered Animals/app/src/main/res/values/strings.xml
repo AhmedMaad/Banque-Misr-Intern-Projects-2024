@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="app_name">Endangered Animals</string>
+
+    <string name="african_forest_elephant">African Forest Elephant</string>
+    <string name="amur_leopard">Amur Leopard</string>
+    <string name="axolotl">Axolotl</string>
+    <string name="javan_rhino">Javan Rhino</string>
+    <string name="mountain_gorilla">Mountain Gorilla</string>
+    <string name="pangolin">Pangolin</string>
+    <string name="saola">Saola</string>
+    <string name="sunda_island_tiger">Sunda Island Tiger</string>
+    <string name="tapanuli_orangutan">Tapanuli Orangutan</string>
+    <string name="vaquita">Vaquita</string>
+
+    <string name="african_forest_elephant_details">Is a subspecies of the African elephant that are found in the rainforests of Central Africa. These elephants are threatened by habitat loss and poaching for their ivory.</string>
+    <string name="amur_leopard_details">One of the rarest big cats in the world, with only around 100 individuals left in the wild. These leopards are found in the border region between Russia and China.</string>
+    <string name="axolotl_details">Known as the Mexican salamander, the axolotl is a unique amphibian that can regenerate limbs. These fascinating creatures are critically endangered due to habitat loss and water pollution.</string>
+    <string name="javan_rhino_details">Javan rhinos have suffered a staggering decline in their numbers due to hunting and habitat loss. There are estimated to be fewer than 70 Javan rhinos left in the wild.</string>
+    <string name="mountain_gorilla_details">Found in the mountainous forests of central Africa. These gentle giants are critically endangered, with only around 1,000 individuals left in the wild.</string>
+    <string name="pangolin_details">Pangolins are covered in tough scales and are the most trafficked mammal in the world. They are threatened by poaching for their scales, which are used in traditional medicine in some cultures.</string>
+    <string name="saola_details">A mysterious deer species found in the Annamite Mountains of Vietnam and Laos. Very little is known about saola, as they are elusive and live in dense forests.</string>
+    <string name="sunda_island_tiger_details">Known as the Sumatran tiger, is the smallest tiger subspecies in the world. There are only around 400 Sumatran tigers left in the wild, found on the Indonesian island of Sumatra.</string>
+    <string name="tapanuli_orangutan_details">The most recently discovered great ape species. These orangutans are found in the Batang Toru ecosystem on the island of Sumatra in Indonesia.</string>
+    <string name="vaquita_details">The world\'s most endangered marine mammal. These small porpoises are found in the Gulf of California, Mexico. Vaquitas are accidentally entangled and drowned in gillnets set to catch fish.</string>
+
+</resources>
