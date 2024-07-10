@@ -24,4 +24,7 @@
     <string name="tapanuli_orangutan_details">The most recently discovered great ape species. These orangutans are found in the Batang Toru ecosystem on the island of Sumatra in Indonesia.</string>
     <string name="vaquita_details">The world\'s most endangered marine mammal. These small porpoises are found in the Gulf of California, Mexico. Vaquitas are accidentally entangled and drowned in gillnets set to catch fish.</string>
 
+    <string name="save">Save</string>
+    <string name="the_animal">&#032;the animal</string>
+
 </resources>
