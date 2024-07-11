@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,7 +42,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EndangeredAnimalsTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AnimalsList(animals: List<Animal>, modifier: Modifier = Modifier) {
+fun AnimalsList(animals: List<Animal>) {
     LazyColumn {
         items(animals) {
             AnimalsListItem(animal = it)
@@ -66,7 +66,9 @@ fun AnimalsList(animals: List<Animal>, modifier: Modifier = Modifier) {
 fun AnimalsListItem(animal: Animal, modifier: Modifier = Modifier) {
     Card(
         colors = CardDefaults.cardColors(containerColor = PowderBlue),
-        modifier = modifier.fillMaxWidth().padding(8.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -89,6 +91,7 @@ fun AnimalsListItem(animal: Animal, modifier: Modifier = Modifier) {
                 Text(
                     text = stringResource(id = animal.name),
                     style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center,
                     modifier = modifier
                         //The parent will divide the vertical space remaining
                         //after measuring unweighted child elements
@@ -111,7 +114,6 @@ fun AnimalsListItem(animal: Animal, modifier: Modifier = Modifier) {
                     },
                     modifier = modifier.clickable {
                     }
-
                 )
             }
         }
@@ -122,5 +124,5 @@ fun AnimalsListItem(animal: Animal, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun ListItemPreview() {
-    AnimalsListItem(animal = DataSource().getAnimalsData()[0])
+    AnimalsListItem(animal = DataSource().getAnimalsData()[4])
 }

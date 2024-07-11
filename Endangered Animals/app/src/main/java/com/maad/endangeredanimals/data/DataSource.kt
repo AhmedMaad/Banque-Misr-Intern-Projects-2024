@@ -1,6 +1,7 @@
 package com.maad.endangeredanimals.data
 
 import com.maad.endangeredanimals.R
+import com.maad.endangeredanimals.data.constants.Constants
 import com.maad.endangeredanimals.model.Animal
 
 class DataSource {
@@ -12,7 +13,7 @@ class DataSource {
                 R.string.african_forest_elephant,
                 R.string.african_forest_elephant_details,
                 R.drawable.african_forest_elephant,
-                "https://www.worldwildlife.org/species/african-forest-elephant"
+                Constants.AFRICAN_FOREST_ELEPHANT_URL
             )
         )
         animals.add(
@@ -20,7 +21,7 @@ class DataSource {
                 R.string.amur_leopard,
                 R.string.amur_leopard_details,
                 R.drawable.amur_leopard,
-                "https://www.worldwildlife.org/species/amur-leopard"
+                Constants.AMUR_LEOPARD_URL
             )
         )
         animals.add(
@@ -28,7 +29,7 @@ class DataSource {
                 R.string.axolotl,
                 R.string.axolotl_details,
                 R.drawable.axolotl,
-                "https://www.nationalgeographic.com/animals/amphibians/facts/axolotl"
+                Constants.AXOLOTL_URL
             )
         )
         animals.add(
@@ -36,7 +37,7 @@ class DataSource {
                 R.string.javan_rhino,
                 R.string.javan_rhino_details,
                 R.drawable.javan_rhino,
-                "https://rhinos.org/about-rhinos/rhino-species/javan-rhino/"
+                Constants.JAVAN_RHINO_URL
             )
         )
         animals.add(
@@ -44,7 +45,7 @@ class DataSource {
                 R.string.mountain_gorilla,
                 R.string.mountain_gorilla_details,
                 R.drawable.mountain_gorilla,
-                "https://www.worldwildlife.org/species/mountain-gorilla"
+                Constants.MOUNTAIN_GORILLA_URL
             )
         )
         animals.add(
@@ -52,7 +53,7 @@ class DataSource {
                 R.string.pangolin,
                 R.string.pangolin_details,
                 R.drawable.pangolin,
-                "https://www.awf.org/wildlife-conservation/pangolin"
+                Constants.PANGOLIN_URL
             )
         )
         animals.add(
@@ -60,7 +61,7 @@ class DataSource {
                 R.string.saola,
                 R.string.saola_details,
                 R.drawable.saola,
-                "https://www.worldwildlife.org/species/saola"
+                Constants.SAOLA_URL
             )
         )
         animals.add(
@@ -68,7 +69,7 @@ class DataSource {
                 R.string.sunda_island_tiger,
                 R.string.sunda_island_tiger_details,
                 R.drawable.sunda_island_tiger,
-                "https://www.worldwildlife.org/species/sunda-tiger"
+                Constants.SUNDA_ISLAND_TIGER_URL
             )
         )
         animals.add(
@@ -76,7 +77,7 @@ class DataSource {
                 R.string.tapanuli_orangutan,
                 R.string.tapanuli_orangutan_details,
                 R.drawable.tapanuli_orangutan,
-                "https://en.wikipedia.org/wiki/Tapanuli_orangutan"
+                Constants.TAPANULI_ORANGUTAN_URL
             )
         )
         animals.add(
@@ -84,7 +85,7 @@ class DataSource {
                 R.string.vaquita,
                 R.string.vaquita_details,
                 R.drawable.vaquita,
-                "https://www.fisheries.noaa.gov/species/vaquita"
+                Constants.VAQUITA_URL
             )
         )
         return animals
