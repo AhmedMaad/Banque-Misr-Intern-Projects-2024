@@ -1,6 +1,5 @@
 package com.maad.endangeredanimals
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -45,8 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.maad.endangeredanimals.data.DataSource
 import com.maad.endangeredanimals.model.Animal
+import com.maad.endangeredanimals.ui.theme.CatskillWhite
 import com.maad.endangeredanimals.ui.theme.EndangeredAnimalsTheme
-import com.maad.endangeredanimals.ui.theme.PowderBlue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +82,7 @@ fun AnimalsListItem(animal: Animal, modifier: Modifier = Modifier) {
     }
 
     Card(
-        colors = CardDefaults.cardColors(containerColor = PowderBlue),
+        colors = CardDefaults.cardColors(containerColor = CatskillWhite),
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
@@ -152,6 +151,7 @@ fun AnimalHelperDialog(
 
     when {
         isDialogShown -> AlertDialog(
+            containerColor = CatskillWhite,
             //called when the user tries to dismiss the Dialog by clicking outside
             //or pressing the back button
             onDismissRequest = { },
