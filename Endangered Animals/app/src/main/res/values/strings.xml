@@ -25,6 +25,11 @@
     <string name="vaquita_details">The world\'s most endangered marine mammal. These small porpoises are found in the Gulf of California, Mexico. Vaquitas are accidentally entangled and drowned in gillnets set to catch fish.</string>
 
     <string name="save">Save</string>
-    <string name="the_animal">\u0020the animal</string>
+    <string name="the_animal">the animal</string>
+
+    <string name="save_the_animal">%1$s %2$s%3$s</string>
+    <string name="help">Help</string>
+    <string name="proceed">Proceed</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
