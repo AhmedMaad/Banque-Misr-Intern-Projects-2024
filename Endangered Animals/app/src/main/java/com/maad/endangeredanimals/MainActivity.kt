@@ -77,9 +77,11 @@ fun AnimalsListItem(animal: Animal, modifier: Modifier = Modifier) {
 
     //State Hoisting
     var isDialogShown by remember { mutableStateOf(false) }
-    AnimalHelperDialog(animal = animal, isDialogShown = isDialogShown) {
-        isDialogShown = it
-    }
+
+    if (isDialogShown)
+        AnimalHelperDialog(animal = animal) {
+            isDialogShown = it
+        }
 
     Card(
         colors = CardDefaults.cardColors(containerColor = CatskillWhite),
@@ -143,54 +145,51 @@ fun AnimalsListItem(animal: Animal, modifier: Modifier = Modifier) {
 @Composable
 fun AnimalHelperDialog(
     animal: Animal,
-    isDialogShown: Boolean,
+    //isDialogShown: Boolean,
     onShowDialogChange: (Boolean) -> Unit
 ) {
 
     val context = LocalContext.current
 
-    when {
-        isDialogShown -> AlertDialog(
-            containerColor = CatskillWhite,
-            //called when the user tries to dismiss the Dialog by clicking outside
-            //or pressing the back button
-            onDismissRequest = { },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        val i = Intent(Intent.ACTION_VIEW, animal.link.toUri())
-                        context.startActivity(i)
-                        onShowDialogChange(false)
-                    }
-                ) { Text(text = stringResource(R.string.proceed)) }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = { onShowDialogChange(false) }
-                ) { Text(text = stringResource(R.string.cancel)) }
-            },
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_help),
-                    contentDescription = stringResource(R.string.help)
+    AlertDialog(
+        containerColor = CatskillWhite,
+        //called when the user tries to dismiss the Dialog by clicking outside
+        //or pressing the back button
+        onDismissRequest = { },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    val i = Intent(Intent.ACTION_VIEW, animal.link.toUri())
+                    context.startActivity(i)
+                    onShowDialogChange(false)
+                }
+            ) { Text(text = stringResource(R.string.proceed)) }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { onShowDialogChange(false) }
+            ) { Text(text = stringResource(R.string.cancel)) }
+        },
+        icon = {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_help),
+                contentDescription = stringResource(R.string.help)
+            )
+        },
+        title = {
+            Text(
+                text = stringResource(
+                    id = R.string.save_the_animal,
+                    stringResource(id = R.string.save),
+                    stringResource(id = R.string.the_animal),
+                    '?'
                 )
-            },
-            title = {
-                Text(
-                    text = stringResource(
-                        id = R.string.save_the_animal,
-                        stringResource(id = R.string.save),
-                        stringResource(id = R.string.the_animal),
-                        '?'
-                    )
-                )
-            },
-            text = {
-                Text(text = stringResource(id = animal.description))
-            }
-        )
-    }
-
+            )
+        },
+        text = {
+            Text(text = stringResource(id = animal.description))
+        }
+    )
 }
 
 @Preview(showBackground = true)
