@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -41,7 +40,7 @@ class ImageEffectActivity : ComponentActivity() {
                         ImageEffect(
                             photo = photo,
                             colorFilter = filter,
-                            paddingValues = innerPadding
+                            modifier = Modifier.padding(innerPadding)
                         )
                     } else {
                         val contrast = 2f // 0f..10f (1 should be default)
@@ -56,7 +55,7 @@ class ImageEffectActivity : ComponentActivity() {
                         ImageEffect(
                             photo = photo,
                             colorFilter = filter,
-                            paddingValues = innerPadding
+                            modifier = Modifier.padding(innerPadding)
                         )
                     }
                 }
@@ -69,7 +68,6 @@ class ImageEffectActivity : ComponentActivity() {
 fun ImageEffect(
     photo: Uri,
     colorFilter: ColorFilter,
-    paddingValues: PaddingValues,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -81,7 +79,6 @@ fun ImageEffect(
         contentDescription = stringResource(R.string.photo),
         colorFilter = colorFilter,
         modifier = modifier
-            .padding(paddingValues)
             .fillMaxSize()
     )
 }
