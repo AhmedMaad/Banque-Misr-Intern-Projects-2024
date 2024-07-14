@@ -1,12 +1,8 @@
 package com.maad.photopickerapp
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -18,7 +14,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -47,79 +42,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             PhotoPickerAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PhotoPicker(modifier = Modifier.padding(innerPadding))
+
                 }
             }
         }
     }
 }
 
-@Composable
-fun PhotoPicker(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
-    var picUri by remember { mutableStateOf<Uri?>(null) }
-    val resultLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
-        picUri = it
-    }
-
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
-    ) {
-        //* means all formats (e.g. PNG, JPEG, ..., etc.)
-        Button(onClick = { resultLauncher.launch("image/*") }) {
-            Text(text = stringResource(R.string.pick_a_photo))
-        }
-        Image(
-            painter = rememberAsyncImagePainter(
-                model = picUri,
-                imageLoader = ImageLoader(context)
-            ),
-            contentDescription = stringResource(R.string.photo),
-            modifier = modifier
-                .width(250.dp)
-                .height(250.dp)
-        )
-        ButtonEffect(
-            context = context,
-            effect = "bw",
-            picUri = picUri,
-            btnText = R.string.black_and_white
-        )
-        ButtonEffect(
-            context = context,
-            effect = "bc",
-            picUri = picUri,
-            btnText = R.string.brightness_and_contrast
-        )
-    }
-
-}
-
-@Composable
-fun ButtonEffect(context: Context, effect: String, picUri: Uri?, @StringRes btnText: Int) {
-    Button(onClick = {
-        if (picUri != null) {
-            val i = Intent(context, ImageEffectActivity::class.java)
-            i.putExtra("effect", effect)
-            i.putExtra("photo", picUri)
-            context.startActivity(i)
-        } else
-            Toast.makeText(
-                context,
-                R.string.choose_an_image_before_selecting_an_effect,
-                Toast.LENGTH_LONG
-            ).show()
-
-    }) {
-        Text(text = stringResource(id = btnText))
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PhotoPickerPreview() {
-    PhotoPicker()
-}

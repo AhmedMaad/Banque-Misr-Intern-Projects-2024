@@ -5,5 +5,6 @@
     <string name="title_activity_image_effect">ImageEffectActivity</string>
     <string name="choose_an_image_before_selecting_an_effect">Choose an image before selecting an effect</string>
     <string name="black_and_white">Black and White Effect</string>
-<string name="brightness_and_contrast">Brightness and Contrast Effect</string>
+    <string name="brightness_and_contrast">Brightness and Contrast Effect</string>
+    <string name="title_activity_picture_chooser">PictureChooserActivity</string>
 </resources>
