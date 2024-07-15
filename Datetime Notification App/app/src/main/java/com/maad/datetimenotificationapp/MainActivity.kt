@@ -1,5 +1,13 @@
 package com.maad.datetimenotificationapp
 
+import android.Manifest
+import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,8 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.maad.datetimenotificationapp.ui.theme.DatetimeNotificationAppTheme
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -42,6 +54,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             DatetimeNotificationAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    //You must create the notification channel before posting any notifications
+                    createNotificationChannel(LocalContext.current)
                     DateTime(Modifier.padding(innerPadding))
                 }
             }
@@ -61,6 +75,7 @@ fun DateTime(modifier: Modifier = Modifier) {
         var isTimePickerShown by remember { mutableStateOf(false) }
         var date by remember { mutableStateOf("Choose a date") }
         var isDatePickerShown by remember { mutableStateOf(false) }
+        val context = LocalContext.current
 
         if (isTimePickerShown) {
             TimePickerChooser(
@@ -87,7 +102,11 @@ fun DateTime(modifier: Modifier = Modifier) {
         OutlinedButton(onClick = { isTimePickerShown = true }) { Text(text = time) }
         OutlinedButton(onClick = { isDatePickerShown = true }) { Text(text = date) }
         OutlinedButton(onClick = {
-            //show local notification with notification sent
+            sendConfirmationNotification(
+                context,
+                date,
+                time
+            )
         }) { Text(text = "Send notification") }
     }
 }
@@ -152,6 +171,47 @@ fun DatePickerChooser(
         },
         text = { DatePicker(state = datePickerState) }
     )
+}
+
+// Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is not in the Support Library
+private fun createNotificationChannel(context: Context) {
+    val name = "Datetime"
+    val importance = NotificationManager.IMPORTANCE_DEFAULT
+    val channel = NotificationChannel("1", name, importance)
+    channel.description = "Datetime Scheduled Notification"
+    // Register the channel with the system
+    val notificationManager: NotificationManager =
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    notificationManager.createNotificationChannel(channel)
+}
+
+fun sendConfirmationNotification(context: Context, date: String, time: String) {
+    val builder = NotificationCompat.Builder(context, "1")
+        .setSmallIcon(R.drawable.ic_notification)
+        .setContentTitle("Notification Scheduled")
+        .setContentText("Your notification is scheduled on $date $time")
+        .setAutoCancel(true)
+    //To make the notification appear
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+        != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat
+                .requestPermissions(context.getActivityOrNull()!!, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 5)
+        }
+    else
+        NotificationManagerCompat.from(context).notify(99, builder.build())
+}
+
+fun Context.getActivityOrNull(): Activity? {
+    var context = this
+    //a ContextWrapper provides a flexible way to adapt and customize the behavior
+    //of a Context object without directly modifying its underlying implementation
+    while (context is ContextWrapper) {
+        if (context is Activity) return context
+        context = context.baseContext
+    }
+
+    return null
 }
 
 @Preview(showBackground = true)
