@@ -16,9 +16,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,7 +32,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.maad.counterapp.ui.CounterViewModel
 import com.maad.counterapp.ui.theme.CounterAppTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,9 +50,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+//viewModel() --> Returns an existing ViewModel or creates a new one in the given owner
 @Composable
-fun CounterApp(modifier: Modifier = Modifier) {
-    var counter by remember { mutableIntStateOf(0) }
+fun CounterApp(modifier: Modifier = Modifier, viewModel: CounterViewModel = viewModel()) {
+
+    //(1) --> var counter by remember { mutableIntStateOf(0) }
+    //(2) --> var counter by rememberSaveable { mutableIntStateOf(0) }
+    val counter by viewModel.uiState.collectAsState() //(3)
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,7 +75,10 @@ fun CounterApp(modifier: Modifier = Modifier) {
             )
         )
         Button(
-            onClick = { ++counter },
+            onClick = {
+                //(1 & 2): counter++
+                viewModel.increment()
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = modifier.padding(top = 32.dp)
         ) {

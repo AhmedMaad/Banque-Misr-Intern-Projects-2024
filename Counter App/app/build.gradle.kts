@@ -66,4 +66,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    //This dependency is used for adding the lifecycle aware viewmodel to your compose app
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 }
