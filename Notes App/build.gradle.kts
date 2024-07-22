@@ -2,4 +2,6 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
+    //https://github.com/google/ksp/releases?page=4
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13" apply false
 }
