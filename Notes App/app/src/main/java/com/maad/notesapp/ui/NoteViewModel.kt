@@ -1,5 +1,5 @@
     package com.maad.notesapp.ui
-    
+
     import android.app.Application
     import androidx.lifecycle.AndroidViewModel
     import com.maad.notesapp.database.Note

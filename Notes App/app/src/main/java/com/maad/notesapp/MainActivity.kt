@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NotesAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    HomeScreen(Modifier.padding(innerPadding))
                 }
             }
         }
