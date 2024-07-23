@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -19,16 +18,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.maad.notesapp.database.Note
 
 @Composable
-fun EditingNoteScreen(note: Note, modifier: Modifier = Modifier, navController: NavController) {
+fun EditingNoteScreen(
+    id: Int,
+    noteDetails: String,
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(top = 32.dp, start = 16.dp, end = 16.dp)
     ) {
-        var details by remember { mutableStateOf("") }
+        var details by remember { mutableStateOf(noteDetails) }
 
         OutlinedTextField(
             value = details,
@@ -73,5 +76,5 @@ fun EditingNoteScreen(note: Note, modifier: Modifier = Modifier, navController: 
 @Preview(showBackground = true)
 @Composable
 private fun EditingNoteScreenPreview() {
-    EditingNoteScreen(note = Note(1, "X"), navController = rememberNavController())
+    EditingNoteScreen(id = 2, noteDetails = "test details", navController = rememberNavController())
 }

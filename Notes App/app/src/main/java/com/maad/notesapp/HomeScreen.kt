@@ -1,12 +1,10 @@
 package com.maad.notesapp
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -24,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,6 +31,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.maad.notesapp.database.Note
 import com.maad.notesapp.routes.Route.ADD_NOTE
+import com.maad.notesapp.routes.Route.EDIT_NOTE
 import com.maad.notesapp.ui.NoteViewModel
 
 @Composable
@@ -61,19 +61,22 @@ fun HomeScreen(
 
         LazyColumn(modifier = modifier.padding(top = 60.dp)) {
             items(notes) { note ->
-                NoteListItem(note = note)
+                NoteListItem(note = note){
+                   navController.navigate("$EDIT_NOTE/${note.id}/${note.noteDetails}")
+                }
             }
         }
     }
 }
 
 @Composable
-fun NoteListItem(note: Note, modifier: Modifier = Modifier) {
+fun NoteListItem(note: Note, modifier: Modifier = Modifier, onNavigate: () -> Unit) {
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.LightGray),
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable { onNavigate() }
     ) {
         Text(
             text = note.noteDetails,
@@ -91,5 +94,5 @@ fun NoteListItem(note: Note, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    NoteListItem(note = Note(5, "Hello this is a test note"))
+    //NoteListItem(note = Note(5, "Hello this is a test note"))
 }
