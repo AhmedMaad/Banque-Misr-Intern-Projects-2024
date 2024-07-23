@@ -18,13 +18,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.maad.notesapp.ui.NoteViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.maad.notesapp.database.Note
 
 @Composable
 fun EditingNoteScreen(
     id: Int,
     noteDetails: String,
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    viewModel: NoteViewModel = viewModel()
 ) {
     Column(
         modifier = modifier
@@ -48,8 +52,8 @@ fun EditingNoteScreen(
         ) {
             OutlinedButton(
                 onClick = {
-                    //Update the note and show a confirmation toast message,
-                    //then pop (finish()) to the home page automatically
+                    viewModel.upsertNote(Note(id, details))
+                    navController.popBackStack()
                 },
                 modifier = modifier
                     .weight(1f)
@@ -59,8 +63,8 @@ fun EditingNoteScreen(
             }
             OutlinedButton(
                 onClick = {
-                    //Delete the note and show a confirmation toast message,
-                    //then pop (finish()) to the home page automatically
+                    viewModel.deleteNote(Note(id, noteDetails))
+                    navController.popBackStack()
                 },
                 modifier = modifier
                     .weight(1f)
@@ -71,7 +75,6 @@ fun EditingNoteScreen(
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
