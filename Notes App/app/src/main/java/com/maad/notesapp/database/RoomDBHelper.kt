@@ -16,8 +16,11 @@ abstract class RoomDBHelper : RoomDatabase() {
 
         fun getInstance(context: Context): RoomDBHelper {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(context, RoomDBHelper::class.java, "DB")
-                    .allowMainThreadQueries().build()
+
+                val instance = Room
+                    .databaseBuilder(context, RoomDBHelper::class.java, "DB")
+                    .build()
+
                 INSTANCE = instance
                 instance
             }

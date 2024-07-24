@@ -10,12 +10,13 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
 
     @Upsert
-    fun upsertNote(note: Note)
+    suspend fun upsertNote(note: Note)
 
+    //Flow already has built-in support for asynchronous operations, so no need to add "suspend"
     @Query("SELECT * FROM note")
     fun getAllNotes(): Flow<List<Note>>
 
     @Delete
-    fun deleteNote(note: Note)
+    suspend fun deleteNote(note: Note)
 
 }
