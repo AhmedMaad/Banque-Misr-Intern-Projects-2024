@@ -17,10 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
-import coil.compose.SubcomposeAsyncImage
-import coil.imageLoader
 import coil.request.ImageRequest
 import com.maad.infinitydogs.api.Dog
 import com.maad.infinitydogs.api.DogAPICallable
@@ -48,42 +45,40 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DogImage(modifier: Modifier = Modifier) {
-    var link by remember { mutableStateOf<String?>(null) }
+    var dog by remember { mutableStateOf<Dog?>(null) }
+    var isLoading by remember { mutableStateOf(true) }
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        getImage(
-            onImageReceived = { link = it },
-            onFailure = {
-                val toastMessage = if (it.message!!.contains("Unable to resolve host"))
-                    "Check your connection"
-                else
-                    "Failed to load image"
-                Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT)
-                    .show()
-            }
+        getDogImage {
+            if (it != null)
+                dog = it
+            else
+                Toast.makeText(context, "Failed to load image", Toast.LENGTH_SHORT).show()
+            isLoading = false
+        }
+    }
+    if (!isLoading) {
+        AsyncImage(
+            model = ImageRequest
+                .Builder(context)
+                .data(dog?.imageLink)
+                .crossfade(700)
+                .placeholder(R.drawable.ic_downloading)
+                .error(R.drawable.ic_broken_image)
+                .build(),
+            //model = link,
+            //imageLoader = context.imageLoader,
+            contentDescription = "Dog image",
+            modifier = modifier.fillMaxSize()
         )
     }
 
-    AsyncImage(
-        model = ImageRequest
-            .Builder(context)
-            .data(link)
-            .crossfade(true)
-            .crossfade(700)
-            .error(R.drawable.ic_broken_image)
-            .build(),
-        //model = link,
-        contentDescription = "Dog image",
-        //To execute image requests
-        imageLoader = context.imageLoader,
-        modifier = modifier.fillMaxSize()
-    )
 }
 
-private fun getImage(
-    onImageReceived: (String?) -> Unit,
-    onFailure: (Throwable) -> Unit
+
+private fun getDogImage(
+    onDogReceived: (Dog?) -> Unit,
 ) {
     val retrofit = Retrofit
         .Builder()
@@ -93,16 +88,13 @@ private fun getImage(
     val c = retrofit.create(DogAPICallable::class.java)
     c.getImage().enqueue(object : Callback<Dog> {
         override fun onResponse(call: Call<Dog>, response: Response<Dog>) {
-            val image = response.body()?.imageLink
-            if (image != null)
-                onImageReceived(image)
-            else
-                onImageReceived(null)
+            val dog = response.body()
+            onDogReceived(dog)
         }
 
         override fun onFailure(call: Call<Dog>, t: Throwable) {
             Log.d("trace", "Error: ${t.message}")
-            onFailure(t)
+            onDogReceived(null)
         }
     })
 }
