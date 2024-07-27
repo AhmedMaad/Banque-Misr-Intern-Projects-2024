@@ -38,7 +38,6 @@ class CategoryScreenViewModel : ViewModel() {
             _meals.update {
                 MealAPIService.callable.getMeals(categoryName).meals
             }
-
         }
     }
 

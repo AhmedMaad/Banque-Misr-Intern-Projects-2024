@@ -45,8 +45,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.maad.cookit.constants.Constants
 import com.maad.cookit.model.Category
 import com.maad.cookit.model.Meal
+import com.maad.cookit.navigation.AppRoutes
 import org.jetbrains.annotations.Async
 
 @Composable
@@ -72,7 +74,9 @@ fun CategoryScreen(
         Spacer(modifier = Modifier.padding(top = 32.dp))
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
             items(meals) { meal ->
-                CategoryMealListItem(meal = meal)
+                CategoryMealListItem(meal = meal) {
+                    navController.navigate("${AppRoutes.RECIPE_ROUTE}/${meal.id}")
+                }
             }
         }
     }
@@ -132,13 +136,15 @@ fun MainCategoryListItem(
 @Composable
 fun CategoryMealListItem(
     meal: Meal,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = modifier
             .width(180.dp)
             .height(200.dp)
             .padding(8.dp)
+            .clickable { onClick() }
     ) {
         Card(
             modifier = modifier
@@ -151,8 +157,7 @@ fun CategoryMealListItem(
                 text = if (meal.name.length < 20)
                     meal.name
                 else
-                    "${meal.name.dropLast(meal.name.length - 20)}..."
-                ,
+                    "${meal.name.dropLast(meal.name.length - 20)}...",
                 fontWeight = FontWeight.ExtraBold,
                 textAlign = TextAlign.Center,
                 modifier = modifier
@@ -180,7 +185,7 @@ private fun CategoryListItemPreview() {
         MainCategoryListItem(
             Category(
                 "Miscellaneous",
-                "https://www.themealdb.com/images/category/beef.png"
+                ""
             )
         ) {}
         CategoryMealListItem(
@@ -188,10 +193,10 @@ private fun CategoryListItemPreview() {
                 "123",
                 "Bread and another bread to make some bread",
                 "",
-                "bla bla bla",
+                "",
                 ""
             )
-        )
+        ) {}
     }
 
 }
