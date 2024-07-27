@@ -16,7 +16,7 @@ interface MealAPICallable {
     suspend fun getCategories(): CategoryRoot
 
     @GET(FILTER_ENDPOINT)
-    fun getMeals(@Query(CATEGORY_QUERY) categoryName: String): MealRoot
+    suspend fun getMeals(@Query(CATEGORY_QUERY) categoryName: String): MealRoot
 
     @GET(LOOKUP_ENDPOINT)
     fun getRecipe(@Query(INGREDIENT_QUERY) mealId: String): MealRoot
