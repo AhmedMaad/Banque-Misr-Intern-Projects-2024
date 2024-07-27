@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface MealAPICallable {
 
     @GET(CATEGORIES_ENDPOINT)
-    fun getCategories(): CategoryRoot
+    suspend fun getCategories(): CategoryRoot
 
     @GET(FILTER_ENDPOINT)
     fun getMeals(@Query(CATEGORY_QUERY) categoryName: String): MealRoot
