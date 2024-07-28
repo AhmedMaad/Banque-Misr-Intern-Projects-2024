@@ -81,7 +81,6 @@ fun TripPriceScreen(
         }
     }
 }
-//}
 
 @Preview(showBackground = true)
 @Composable
