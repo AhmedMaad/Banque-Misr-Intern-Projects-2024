@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -63,7 +64,9 @@ fun CategoryScreen(
     val meals by viewModel.meals.collectAsState()
     Log.d("trace", "Received Meals: $meals")
 
-    Column {
+    Column(
+        modifier = modifier.padding(top = 32.dp)
+    ) {
         LazyRow {
             items(categories) { category ->
                 MainCategoryListItem(category = category) {
@@ -116,8 +119,8 @@ fun MainCategoryListItem(
             contentDescription = category.name,
             contentScale = ContentScale.Crop,
             modifier = modifier
-                .size(120.dp)
-                .clip(RoundedCornerShape(60.dp))
+                .size(100.dp)
+                .clip(RoundedCornerShape(50.dp))
                 .border(
                     BorderStroke(4.dp, rainbowColorsBrush),
                     CircleShape
@@ -127,6 +130,7 @@ fun MainCategoryListItem(
         Text(
             text = category.name,
             fontFamily = FontFamily.Monospace,
+            fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             modifier = modifier.padding(top = 8.dp)
         )

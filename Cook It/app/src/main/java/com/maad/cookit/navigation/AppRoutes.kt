@@ -28,7 +28,7 @@ fun AppNavHost(modifier: Modifier = Modifier) {
             arguments = listOf(navArgument(MEAL_ID) { type = NavType.StringType })
         ) {
             val mealId = it.arguments?.getString(MEAL_ID)!!
-            RecipeScreen(mealId)
+            RecipeScreen(mealId, modifier)
         }
     }
 

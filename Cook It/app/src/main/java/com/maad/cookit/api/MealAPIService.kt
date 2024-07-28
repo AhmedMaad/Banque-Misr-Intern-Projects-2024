@@ -13,7 +13,7 @@ object MealAPIService {
         .build()
 
     //Lazy properties: the value is computed "only" on first access
-    val callable by lazy {
+    val callable: MealAPICallable by lazy {
         retrofit.create(MealAPICallable::class.java)
     }
 
