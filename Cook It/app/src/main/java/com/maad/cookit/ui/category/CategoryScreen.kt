@@ -1,6 +1,7 @@
 package com.maad.cookit.ui.category
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -37,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -63,6 +65,10 @@ fun CategoryScreen(
 
     val meals by viewModel.meals.collectAsState()
     Log.d("trace", "Received Meals: $meals")
+
+    val hasError by viewModel.hasError.collectAsState()
+    if (hasError)
+        Toast.makeText(LocalContext.current, "Check your connection", Toast.LENGTH_SHORT).show()
 
     Column(
         modifier = modifier.padding(top = 32.dp)

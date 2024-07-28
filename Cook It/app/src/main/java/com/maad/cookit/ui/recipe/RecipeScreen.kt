@@ -3,6 +3,7 @@ package com.maad.cookit.ui.recipe
 import android.content.Intent
 import android.graphics.Paint.Align
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,7 +41,10 @@ fun RecipeScreen(
     val meals by viewModel.meals.collectAsState()
     Log.d("trace", "Recipe: $meals")
 
-    if (meals.isNotEmpty()) {
+    val hasError by viewModel.hasError.collectAsState()
+    if (hasError)
+        Toast.makeText(LocalContext.current, "Check your connection", Toast.LENGTH_SHORT).show()
+    else if (meals.isNotEmpty()) {
         val meal = meals[0]
         RecipeContent(meal = meal)
     }
@@ -62,7 +66,7 @@ fun RecipeContent(meal: Meal, modifier: Modifier = Modifier) {
             lineHeight = 48.sp,
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(top = 32.dp)
+                .padding(top = 32.dp, start = 16.dp, end = 16.dp)
         )
         Text(
             text = meal.instructions,
